@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mise en page avec CSS Grid</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-transform:capitalize;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-areas: 
+    "header header header"
+    "aside1 main aside2"
+    "footer footer footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 100vh;
+  gap: 10px;
+  text-align: center;
+ 
+  
+}
+
+header {
+  grid-area: header;
+  background-color: #ff6347;
+  text-align: center;
+  padding: 30px;
+  font-size: 1.5rem;
+  border-radius:10px;
+  margin:5px;
+
+  
+}
+
+.aside1 {
+  grid-area: aside1;
+  background-color: #f4d03f;
+  padding: 20px;
+  border-radius:10px;
+  margin:5px;
+}
+
+main {
+  grid-area: main;
+  background-color: #5dade2;
+  padding: 20px;
+  border-radius:10px;
+  margin:5px;
+}
+
+.aside2 {
+  grid-area: aside2;
+  background-color: palevioletred;
+  padding: 20px;
+  border-radius:10px;
+  margin:5px;
+}
+
+footer {
+  grid-area: footer;
+  background-color: rgb(96, 240, 96);
+  text-align: center;
+  padding: 20px;
+  border-radius:10px;
+  margin:5px;
+}
+@media screen (max-width:550px){
+    grid-template-columns:1fr;
+    grid-template-rows: 0,4fr 0,4 fr 2,2fr 1,2fr 1,2fr 1,2fr;
+    grid-template-areas:
+    "Header"
+    "Aside1"
+    "Main"
+    "Aside2"
+    "footer";
+}
+    
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>Header</header>
+    <aside class="aside1">Aside1</aside>
+    <main><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, iure voluptatem exercitationem provident vero porro necessitatibus doloremque voluptatum omnis ducimus. Tenetur ea voluptate ipsa accusantium aliquam, odit magnam omnis iure?
+    Aliquam, quis deserunt error voluptatum modi animi earum beatae commodi sunt explicabo quas officiis laborum cupiditate? Ducimus quae, eligendi sapiente minima placeat necessitatibus suscipit sed deleniti natus? Perspiciatis, numquam dolor.</p></main>
+    <aside class="aside2">Aside 2</aside>
+    <footer>Footer</footer>
+  </div>
+</body>
+</html>
