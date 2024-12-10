@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family:Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            text-decoration:none;
+            list-style-type: none;
+        }
+        body{
+            background-image: url(pleine-lune.avif) ;
+            background-position: center;
+            background-size: cover;
+            height:100vh;
+            
+            
+        }
+       
+        header nav{
+            position:fixed;
+            top:0;
+            right:0;
+            width:100%; 
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            z-index:100;
+            padding:10px 20px;
+            
+            }
+        .links{
+            display:flex;
+            justify-content: space-between;
+            
+           
+            
+            
+
+        }
+        .links ul{
+            display:flex;
+            gap:20px;
+            
+        
+        }
+        .links ul li {
+            text-transform:capitalize;
+            color:white;
+            transition:color 0.3s;
+            
+        }
+        .links li:hover{
+            color:#ffa500;
+        }
+        .logo{
+            font-size:22px;
+            color:orange;
+            text-transform: capitalize;
+            margin-left: 10px;
+        }
+        .search{
+            display:flex;
+            gap:5px;
+        
+        }
+        .search input{
+            padding:5px 10px;
+            border-radius:5px;
+            border:none;
+        }
+        .search button{
+            background-color: #ffa500;
+            border-radius: 5px;
+            padding:5px 10px;
+            cursor: pointer;
+
+
+        }
+        main{
+            margin-top:80px;
+            padding:20px;
+        }
+        section{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+        .text-content{
+            flex:2;
+
+        }
+        .login-box{
+            flex:1;
+            background-color: #333;
+            padding:20px;
+            border-radius:10px;
+            
+        }
+        .text-content h1{
+            font-size: 48px;
+            color:#fff;
+        
+        }
+          h1 span{
+            color:#ffa500;
+
+        }
+        .text-content p{
+            margin:20px 0;
+
+        }
+        button{
+            padding:10px 20px;
+            background-color:#ffa500;
+            color:black;
+            border:none;
+            border-radius:5px;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color: bisque;
+            color:black;
+        }
+        .login-box h2{
+            margin-bottom:20px;
+            color:black;
+        }
+        .login-box input{
+            width:100%;
+            padding:10px;
+            margin-bottom:10px;
+            border:1px solid black;
+            border-radius:5px;
+        }
+        .login-box button{
+         width:100%;
+         padding:10px;
+         background-color:#ffa500;
+         color:black;
+         border:none;
+         border-radius: 5px;
+         cursor:pointer;
+
+        }
+        .login-box p{
+         margin:10px;
+         text-align: center;
+
+
+
+
+      } 
+       .login-box a{
+        text-align: center;
+       }
+       .icons{
+       display:flex;
+       justify-content: space-around;
+       margin-top:20px;
+       }
+       .icons a{
+        padding:10px;
+        border-radius: 50%;
+        font-size:20px;
+
+
+       }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PraRoz</div>
+            <div class="links">
+                <ul>
+                    <li><a>home</a></li>
+                    <li><a>about</a></li>
+                    <li><a>service</a></li>
+                    <li><a>design</a></li>
+                    <li><a>Contact</a></li>
+                </ul>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Type to search"><button>Search</button>
+            </div>
+            
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="text-content">
+                <h1>Web design & <span>development</span><br>course</h1>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore culpa rem voluptas nisi dolores itaque numquam corrupti veritatis quis modi eaque tempore, id dolorum optio illum quaerat voluptate excepturi officiis.</p>
+                <button>JOIN US</button>
+
+
+            </div>
+            <div class="login-box">
+                <h2>Login Here</h2>
+                <form>
+                <input type="email" placeholder="Enter Email Here">
+                <input type="Password" placeholder="Enter Password Here">
+                <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account?<br>
+                <a href="#">Sign up here </a></p>
+                <p>Log in with</p>
+                <div class="icons">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-solid fa-g"></i></a>
+                    <a href="#"><i class="fa-brands fa-skype"></i></a>
+                </div>
+              
+
+            </div>
+
+        </section>
+    </main>
+    
+</body>
+</html>
