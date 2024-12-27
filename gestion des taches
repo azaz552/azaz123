@@ -1,0 +1,124 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+import sqlite3
+from datetime import datetime
+
+# Database setup
+conn = sqlite3.connect('tasks.db')
+cursor = conn.cursor()
+cursor.execute('''CREATE TABLE IF NOT EXISTS tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    title TEXT,
+                    description TEXT,
+                    priority TEXT,
+                    status TEXT,
+                    created_date TEXT,
+                    due_date TEXT)''')
+conn.commit()
+
+
+def add_task():
+    title = entry_title.get()
+    description = text_description.get("1.0", tk.END).strip()
+    priority = combo_priority.get()
+    status = status_var.get()
+    created_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  
+    due_date = entry_due_date.get()
+
+    try:
+        datetime.strptime(due_date, "%Y-%m-%d")  
+    except ValueError:
+        messagebox.showwarning("Format de date invalide", "Veuillez entrer la date d'échéance au format YYYY-MM-DD.")
+        return
+
+    if title and description and priority and status and due_date:
+        cursor.execute("INSERT INTO tasks (title, description, priority, status, created_date, due_date) VALUES (?, ?, ?, ?, ?, ?)", 
+                       (title, description, priority, status, created_date, due_date))
+        conn.commit()
+        display_tasks()
+        clear_entries()
+    else:
+        messagebox.showwarning("Champs manquants", "Veuillez remplir tous les champs")
+
+def display_tasks():
+    for row in tree.get_children():
+        tree.delete(row)
+    cursor.execute("SELECT * FROM tasks")
+    for task in cursor.fetchall():
+        tree.insert("", "end", values=task)
+
+def clear_entries():
+    entry_title.delete(0, tk.END)
+    text_description.delete("1.0", tk.END)
+    combo_priority.set('')
+    status_var.set(None)
+    entry_due_date.delete(0, tk.END)
+
+root = tk.Tk()
+root.title("Gestion des Tâches")
+
+tk.Label(root, text="Titre:").grid(row=0, column=0, padx=5, pady=5)
+entry_title = tk.Entry(root)
+entry_title.grid(row=0, column=1, padx=5, pady=5)
+
+tk.Label(root, text="Description:").grid(row=1, column=0, padx=5, pady=5)
+text_description = tk.Text(root, height=4, width=40)
+text_description.grid(row=1, column=1, padx=5, pady=5)
+
+tk.Label(root, text="Priorité:").grid(row=2, column=0, padx=5, pady=5)
+combo_priority = ttk.Combobox(root, values=["Basse", "Moyenne", "Élevée"])
+combo_priority.grid(row=2, column=1, padx=5, pady=5)
+
+tk.Label(root, text="Statut:").grid(row=3, column=0, padx=5, pady=5)
+status_var = tk.StringVar()
+radio_todo = tk.Radiobutton(root, text="À faire", variable=status_var, value="À faire")
+radio_inprogress = tk.Radiobutton(root, text="En cours", variable=status_var, value="En cours")
+radio_done = tk.Radiobutton(root, text="Terminé", variable=status_var, value="Terminé")
+radio_todo.grid(row=3, column=1, padx=5, pady=5)
+radio_inprogress.grid(row=3, column=2, padx=5, pady=5)
+radio_done.grid(row=3, column=3, padx=5, pady=5)
+tk.Label(root, text="Date de création:").grid(row=4, column=0, padx=5, pady=5)
+entry_created_date = tk.Entry(root, state="readonly")
+entry_created_date.grid(row=4, column=1, padx=5, pady=5)
+entry_created_date.insert(tk.END, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+tk.Label(root, text="Date d'échéance (YYYY-MM-DD):").grid(row=5, column=0, padx=5, pady=5)
+entry_due_date = tk.Entry(root)
+entry_due_date.grid(row=5, column=1, padx=5, pady=5)
+
+tk.Button(root, text="Ajouter", command=add_task).grid(row=6, column=0, padx=5, pady=5)
+tk.Button(root, text="Effacer", command=clear_entries).grid(row=6, column=1, padx=5, pady=5)
+
+columns = ("id", "title", "description", "priority", "status", "created_date", "due_date")
+tree = ttk.Treeview(root, columns=columns, show="headings")
+for col in columns:
+    tree.heading(col, text=col.capitalize())
+    tree.column(col, anchor="center")
+tree.grid(row=7, column=0, columnspan=4, padx=3, pady=5)
+
+display_tasks()
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
