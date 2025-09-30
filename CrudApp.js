@@ -1,0 +1,106 @@
+import React, { useState } from "react";
+
+export default function Product() {
+  // Etat initial des produits
+  const [products, setProducts] = useState([
+    { id: 1, name: "Produit 1", price: 100 },
+    { id: 2, name: "Produit 2", price: 200 },
+  ]);
+
+  // Etats du formulaire
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [editingId, setEditingId] = useState(null);
+
+  // Fonction addProduct
+  const addProduct = () => {
+    const newProduct = { id: Date.now(), name, price };
+    setProducts([...products, newProduct]);
+    setName("");
+    setPrice("");
+  };
+
+  // fonction deleteProduct
+  const deleteProduct = (id) => {
+    setProducts(products.filter((p) => p.id !== id));
+  };
+
+  // fonction pour remplir le formulaire (modifier)
+  const editProduct = (product) => {
+    setEditingId(product.id);
+    setName(product.name);
+    setPrice(product.price);
+  };
+
+  // fonction updateProduct
+  const updateProduct = () => {
+    setProducts(
+      products.map((p) =>
+        p.id === editingId ? { ...p, name, price } : p
+      )
+    );
+    setEditingId(null);
+    setName("");
+    setPrice("");
+  };
+
+  return (
+    <div className="container mt-5">
+      <h2>CRUD Produits</h2>
+
+      {/* Formulaire */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          editingId ? updateProduct() : addProduct();
+        }}
+      >
+        <input
+          type="text"
+          className="form-control mb-2"
+          placeholder="Nom"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input 
+          type="number"
+          className="form-control mb-2"
+          placeholder="Prix"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+        <button className="btn btn-primary" type="submit">
+          {editingId ? "Mettre à jour" : "Ajouter"}
+        </button>
+      </form>
+
+      {/* Liste des produits */}
+      <ul className="list-group mt-4">
+        {products.map((p) => (
+          <li
+            key={p.id}
+            className="list-group-item d-flex justify-content-between align-items-center"
+          >
+            {p.name} - ${p.price}
+            <div>
+              <button
+                className="btn btn-warning btn-sm me-2"
+                onClick={() => editProduct(p)}
+              >
+                Modifier
+              </button>
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => deleteProduct(p.id)}
+              >
+                Supprimer
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
